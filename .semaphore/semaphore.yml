@@ -1,0 +1,40 @@
+version: v1.0
+
+name: Build and test Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+global_job_config:
+
+  secrets:
+    - name: ACCESS_TOKENS
+
+  prologue:
+    commands:
+      - echo $DOCKER_TOKEN | docker login --username "$DOCKER_USERNAME" --password-stdin
+
+  env_vars:
+    - name: DOCKER_USERNAME
+      value: sineverba
+    - name: DOCKER_IMAGE
+      value: mdsn-repeater
+
+blocks:
+  - name: 'Build and test'
+    skip:
+      when: "tag =~ '.*'"
+    task:
+      jobs:
+        - name: 'Build and test'
+          commands:
+            - checkout
+            - docker build --tag $DOCKER_USERNAME/$DOCKER_IMAGE .
+            - docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(VERSION) cat /proc/version | grep "Linux version 5.13.0-30-generic"
+
+promotions:
+  - name: Deploy
+    pipeline_file: build-deploy.yml
+    auto_promote:
+      when: "result = 'passed' and tag =~ '.*'"
