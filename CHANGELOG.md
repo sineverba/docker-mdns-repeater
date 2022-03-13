@@ -1,3 +1,2 @@
-# Next version
-+ Refactor from forked repository
-+ Refactor Dockerfile
+# 1.0.0
++ First commit
