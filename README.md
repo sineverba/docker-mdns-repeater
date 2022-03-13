@@ -14,6 +14,7 @@ I use it for HomeAssistant (to not use `network=host` mode).
 + Pass as environments:
     + `EXTERNAL_INTERFACE`: the physical interface
     + `DOCKER_NETWORK_NAME`: the Docker network name of __other__ container to pass the mDSN repeater
++ You can use a `.env` file (like the example in this repository)
 
 ## docker-compose.yml example
 
@@ -36,9 +37,11 @@ services:
     image: sineverba/mdsn-repeater:1.0.0
     network_mode: "host"
     privileged: true
+    env_file:
+      - ./.env
     environment:
-      - EXTERNAL_INTERFACE=wlp0s20f3
-      - DOCKER_NETWORK_NAME=homeassistant
+      - EXTERNAL_INTERFACE=${EXTERNAL_INTERFACE}
+      - DOCKER_NETWORK_NAME=${DOCKER_NETWORK_NAME}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
