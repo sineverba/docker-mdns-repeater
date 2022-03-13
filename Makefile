@@ -1,6 +1,6 @@
 IMAGE_NAME=sineverba/mdsn-repeater
 CONTAINER_NAME=mdsn-repeater
-VERSION=0.1.0
+VERSION=1.0.0
 
 build:
 	docker build --tag $(IMAGE_NAME):$(VERSION) .
