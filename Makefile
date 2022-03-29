@@ -1,5 +1,5 @@
-IMAGE_NAME=sineverba/mdsn-repeater
-CONTAINER_NAME=mdsn-repeater
+IMAGE_NAME=sineverba/mdns-repeater
+CONTAINER_NAME=mdns-repeater
 VERSION=1.0.0
 
 build:

@@ -19,7 +19,7 @@ global_job_config:
     - name: DOCKER_USERNAME
       value: sineverba
     - name: DOCKER_IMAGE
-      value: mdsn-repeater
+      value: mdns-repeater
 
 blocks:
   - name: 'Build and test'
