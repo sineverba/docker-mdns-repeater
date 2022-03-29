@@ -3,7 +3,7 @@ Docker mDNS repeater
 
 > Docker image to enable mDNS for other containers without setting `net=host` for them
 
-I use it for HomeAssistant (to not use `network=host` mode).
+I use it for HomeAssistant (to not use it with `network=host` mode).
 
 | CI / CD | Status |
 | ------- | ------ |
