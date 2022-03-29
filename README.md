@@ -7,13 +7,14 @@ I use it for HomeAssistant (to not use `network=host` mode).
 
 | CI / CD | Status |
 | ------- | ------ |
-| Semaphore | [![Build Status](https://sineverba.semaphoreci.com/badges/docker-mdsn-repeater/branches/master.svg)](https://sineverba.semaphoreci.com/projects/docker-mdsn-repeater) |
+| Semaphore | [![Build Status](https://sineverba.semaphoreci.com/badges/docker-mdns-repeater/branches/master.svg)](https://sineverba.semaphoreci.com/projects/docker-mdns-repeater) |
 
 ## How to use
-+ Add this image `sineverba/mdsn-repeater:1.0.0` to your `docker-compose.yaml` file
++ Add this image `sineverba/mdns-repeater:1.0.0` to your `docker-compose.yaml` file
 + Pass as environments:
     + `EXTERNAL_INTERFACE`: the physical interface
-    + `DOCKER_NETWORK_NAME`: the Docker network name of __other__ container to pass the mDSN repeater
+    + `DOCKER_NETWORK_NAME`: the Docker network name of __other__ container to pass the mdns repeater
++ You can use a `.env` file (like the example in this repository)
 
 ## docker-compose.yml example
 
@@ -33,12 +34,14 @@ services:
 
   mdns_repeater:
     container_name: mdns_repeater
-    image: sineverba/mdsn-repeater:1.0.0
+    image: sineverba/mdns-repeater:1.0.0
     network_mode: "host"
     privileged: true
+    env_file:
+      - ./.env
     environment:
-      - EXTERNAL_INTERFACE=wlp0s20f3
-      - DOCKER_NETWORK_NAME=homeassistant
+      - EXTERNAL_INTERFACE=${EXTERNAL_INTERFACE}
+      - DOCKER_NETWORK_NAME=${DOCKER_NETWORK_NAME}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
